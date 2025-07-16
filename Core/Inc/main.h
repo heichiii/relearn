@@ -57,6 +57,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define CSB1_ACC_Pin GPIO_PIN_0
+#define CSB1_ACC_GPIO_Port GPIOC
+#define CSB2_GYR_Pin GPIO_PIN_3
+#define CSB2_GYR_GPIO_Port GPIOC
 
 /* USER CODE BEGIN Private defines */
 

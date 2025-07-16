@@ -28,7 +28,7 @@ include("cmake/gcc-arm-none-eabi.cmake")
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 # Enable CMake support for ASM and C languages
-enable_language(C ASM)
+enable_language(C CXX ASM)
 
 # Core project settings
 project(${CMAKE_PROJECT_NAME})
@@ -43,11 +43,19 @@ add_subdirectory(cmake/stm32cubemx)
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
+        application/devices
+        application/tasks
+        bsp/communication
+        bsp/devices
 )
 
 # Add sources to executable
+file(GLOB SOURCES
+        "application/*/*.c"
+        "bsp/*/*.c")
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+        ${SOURCES}
 )
 
 # Add include paths
