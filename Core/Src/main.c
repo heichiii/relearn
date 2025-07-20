@@ -29,7 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "ins.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,7 +50,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+// BMI088 bmi088 = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -58,7 +58,7 @@ void SystemClock_Config(void);
 static void MPU_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
-
+void beep(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -104,25 +104,10 @@ int main(void)
   MX_FDCAN1_Init();
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_2);
-  __HAL_TIM_SET_AUTORELOAD(&htim12, 40);
-  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 20);
-  HAL_Delay(300);
-  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 0);
-  HAL_Delay(10);
-  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 20);
-  HAL_Delay(220);
-  __HAL_TIM_SET_AUTORELOAD(&htim12, 46);
-  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 28);
-  HAL_Delay(150);
-  __HAL_TIM_SET_AUTORELOAD(&htim12, 44);
-  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 22);
-  HAL_Delay(130);
-  __HAL_TIM_SET_AUTORELOAD(&htim12, 40);
-  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 20);
-  HAL_Delay(200);
-  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 0);
-  HAL_GPIO_WritePin()
+  initBMI088(&bmi088);
+  //beep();
+  // initBMI08(&bmi088);
+  // HAL_GPIO_WritePin()
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -207,7 +192,27 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void beep(void)
+{
+  HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_2);
+  __HAL_TIM_SET_AUTORELOAD(&htim12, 510/2);
+  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 255/2);
+  HAL_Delay(300);
+  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 0);
+  HAL_Delay(10);
+  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 255/2);
+  HAL_Delay(220);
+  __HAL_TIM_SET_AUTORELOAD(&htim12, 600/2);
+  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 300/2);
+  HAL_Delay(150);
+  __HAL_TIM_SET_AUTORELOAD(&htim12, 573/2);
+  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 286/2);
+  HAL_Delay(130);
+  __HAL_TIM_SET_AUTORELOAD(&htim12, 510/2);
+  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 255/2);
+  HAL_Delay(200);
+  __HAL_TIM_SetCompare(&htim12, TIM_CHANNEL_2, 0);
+}
 /* USER CODE END 4 */
 
  /* MPU Configuration */

@@ -5,11 +5,7 @@
 #ifndef BMI088_H
 #define BMI088_H
 #include "bmi08_defs.h"
-#include "stm32h7xx_hal_gpio.h"
-#define START_ACC HAL_GPIO_WritePin(CSB1_ACC_GPIO_Port, CSB1_ACC_Pin, GPIO_PIN_RESET)
-#define START_GYR HAL_GPIO_WritePin(CSB2_GYR_GPIO_Port, CSB2_GYR_Pin, GPIO_PIN_RESET)
-#define STOP_ACC HAL_GPIO_WritePin(CSB1_ACC_GPIO_Port, CSB1_ACC_Pin, GPIO_PIN_SET)
-#define STOP_GYR HAL_GPIO_WritePin(CSB2_GYR_GPIO_Port, CSB2_GYR_Pin, GPIO_PIN_SET)
+
 
 typedef struct
 {
@@ -57,10 +53,23 @@ typedef struct
 	uint8_t rate_y_temp[2];
 	uint8_t rate_z_temp[2];
 
-}BMI08;
+}BMI088;
 
-void initBMI08(BMI08 *dev);
-void getAccelData(BMI08 *dev);
-void getGyroData(BMI08 *dev);
+void initBMI088(BMI088 *dev);
+void updateBMI088(BMI088 *dev);
+float getAccX(BMI088 *dev);
+float getAccY(BMI088 *dev);
+float getAccZ(BMI088 *dev);
+float getRateX(BMI088 *dev);
+float getRateY(BMI088 *dev);
+float getRateZ(BMI088 *dev);
+
+
+
+
+
+
+
+
 
 #endif //BMI088_H
